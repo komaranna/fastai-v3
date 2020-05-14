@@ -12,7 +12,7 @@ from starlette.staticfiles import StaticFiles
 export_file_url = 'https://drive.google.com/uc?export=download&id=1-EWGX57MV1n2J2dW6NgjA1sonrFKYasP'
 export_file_name = 'export.pkl'
 
-classes = ['Steve Mnuchin', 'John Oliver']
+classes = ['Mnuchin', 'Oliver']
 path = Path(__file__).parent
 
 app = Starlette()
