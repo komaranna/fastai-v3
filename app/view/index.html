@@ -20,20 +20,33 @@
                accept='image/*'
                onchange='showPicked(this)'>
       </div>
-      <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
+	  <form>
+		<label for='url-to-grab'>File url:</label><br>
+		<input class='url-box' type='text' id='url-to-grab' name='url-to-grab'><br>
+	  </form> 
+	  <button class='choose-file-button' type='button' onclick='showPickedFromUrl()'>Grab Image from URL</button>
+      <button class='choose-file-button' type='button' onclick='showPicker()'>Upload Image</button>
       <div class='upload-label'>
         <label id='upload-label'>No file chosen</label>
       </div>
       <div>
         <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
       </div>
+	  <div class='result-label'>
+        <label id='result-label'></label>
+      </div>
       <div class='analyze'>
         <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
       </div>
-      <div class='result-label'>
-        <label id='result-label'></label>
-      </div>
     </div>
+  </div>
+  <div class='center-bottom'>
+	<p>
+      created by Anna Kómár, 2020
+    </p>
+	<p>
+      source code <a href='https://github.com/komaranna/fastai-v3' target='_blank'>here</a>
+    </p>
   </div>
 </div>
 </body>
