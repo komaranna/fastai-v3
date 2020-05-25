@@ -70,10 +70,13 @@ async def analyze_from_url(request):
     img_data = await request.form()
     img_url = img_data['url']
     response = requests.get(img_url)
-    img = open_image(BytesIO(response.content))
-    prediction = learn.predict(img)[0]
-    prediction_user_readable = classes.get(str(prediction))
-    return JSONResponse({'result': str(prediction_user_readable)})
+    if response.status_code == 200:
+        img = open_image(BytesIO(response.content))
+        prediction = learn.predict(img)[0]
+        prediction_user_readable = classes.get(str(prediction))
+        return JSONResponse({'result': str(prediction_user_readable)})
+    else:
+        return JSONResponse({'result': 'none'})
 
 if __name__ == '__main__':
     if 'serve' in sys.argv:
