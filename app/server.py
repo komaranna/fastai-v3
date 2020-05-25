@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import requests
 import uvicorn
 from fastai import *
 from fastai.vision import *
@@ -12,7 +13,7 @@ from starlette.staticfiles import StaticFiles
 export_file_url = 'https://drive.google.com/uc?export=download&id=1-EWGX57MV1n2J2dW6NgjA1sonrFKYasP'
 export_file_name = 'export.pkl'
 
-classes = ['Mnuchin', 'Oliver']
+classes = {'mnuchin': 'Mnuchin', 'oliver': 'Oliver'}
 path = Path(__file__).parent
 
 app = Starlette()
@@ -55,14 +56,24 @@ async def homepage(request):
     return HTMLResponse(html_file.open().read())
 
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/analyze-from-file', methods=['POST'])
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(img)[0]
-    return JSONResponse({'result': str(prediction)})
+    prediction_user_readable = classes.get(str(prediction))
+    return JSONResponse({'result': str(prediction_user_readable)})
 
+@app.route('/analyze-from-url', methods=['POST'])
+async def analyze_from_url(request):
+    img_data = await request.form()
+    img_url = img_data['url']
+    response = requests.get(img_url)
+    img = open_image(BytesIO(response.content))
+    prediction = learn.predict(img)[0]
+    prediction_user_readable = classes.get(str(prediction))
+    return JSONResponse({'result': str(prediction_user_readable)})
 
 if __name__ == '__main__':
     if 'serve' in sys.argv:
