@@ -13,6 +13,14 @@ body {
     font-size: 14px;
 }
 
+.center-bottom {
+    margin: auto;
+    padding: 10px 50px;
+    text-align: center;
+    font-size: 8px;
+	color: #808080;
+}
+
 .title {
     font-size: 30px;
     margin-top: 1em;
@@ -36,6 +44,16 @@ body {
 .result-label {
     margin-top: 0.5em;
     padding: 10px;
+    font-size: 20px;
+	color: #008080;
+}
+
+input.url-box {
+    width: 300px;
+	height: 25px;
+    border-radius: 2px;
+    background-color: #ffffff;
+    border: solid 1px;
     font-size: 13px;
 }
 
@@ -44,17 +62,17 @@ button.choose-file-button {
     height: 40px;
     border-radius: 2px;
     background-color: #ffffff;
-    border: solid 1px #7052CB;
+    border: solid 1px #008080;
     font-size: 13px;
-    color: #7052CB;
+    color: #008080;
 }
 
 button.analyze-button {
     width: 200px;
     height: 40px;
-    border: solid 1px #7052CB;
+    border: solid 1px #008080;
     border-radius: 2px;
-    background-color: #7052CB;
+    background-color: #008080;
     font-size: 13px;
     color: #ffffff;
 }
