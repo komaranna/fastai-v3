@@ -23,22 +23,8 @@ function showPickedFromUrl() {
 	el("image-picked").src = src;
     el("image-picked").className = "";
 	el("upload-label").innerHTML = input;
-	if (urlValid(input))
-	{
-	  pictureSource = "url";
-	}
-	else
-	{
-	  pictureSource = "none";
-	}
+	pictureSource = "url";
 	el("result-label").innerHTML = ""
-}
-
-function urlValid(image_url){
-	var xhr = new XMLHttpRequest();
-	xhr.open('HEAD', image_url, false);
-	xhr.send();
-	return (xhr.status != 404);
 }
 
 function analyze() {
@@ -100,7 +86,14 @@ function analyzeFromUrl(fileUrl) {
   xhr.onload = function(e) {
     if (this.readyState === 4) {
       var response = JSON.parse(e.target.responseText);
-      el("result-label").innerHTML = `Result: ${response["result"]}`;
+	  if (response["result"] == "none")
+      {
+		alert("Invalid url");
+	  }
+	  else
+      {
+        el("result-label").innerHTML = `Result: ${response["result"]}`;
+	  }
     }
     el("analyze-button").innerHTML = "Analyze";
   };
